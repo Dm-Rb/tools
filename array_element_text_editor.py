@@ -55,7 +55,6 @@ class TextEditor(tk.Tk):
 
 
 def iterating_over_array_and_editing_items(queue_to_gui=None, queue_from_gui=None) -> list or tuple:
-
     ###
     # блок для чтения массива из файла или использование глобальной переменной
     array = ['my_data_1', 'my_data_2', 'my_data_3']  # заменить на необходимые данные
@@ -85,6 +84,10 @@ def iterating_over_array_and_editing_items(queue_to_gui=None, queue_from_gui=Non
 
 
 def run_app():
+    """
+    Графический интерфейс для ручного редактирования элементов массива на лету.
+    Сконфигурировать функцию iterating_over_array_and_editing_items под нужды.
+    """"
     app = TextEditor()
     app.mainloop()
 
