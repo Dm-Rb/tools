@@ -21,8 +21,8 @@ class Spider:
 
         return session
 
-    def get_html(self, url, json_data=False):
-        response = self.session.get(url=url)
+    def get_html(self, url: str, json_data: bool=False, host: bool=True):
+        response = self.session.get(url=self.host + url if host else url)
         if response.status_code != 200:
             raise ValueError(f'status_code != 200: {url}')
         if json_data:
