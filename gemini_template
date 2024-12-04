@@ -1,0 +1,12 @@
+import google.generativeai as genai
+
+
+# pip install google-generativeai
+class Gemini:
+    def __init__(self, api_key, model="gemini-1.5-flash"):
+        genai.configure(api_key=api_key)
+        self.model = genai.GenerativeModel(model)
+
+    def request_generate_content(self, prompt):
+        response = self.model.generate_content(prompt)
+        return response.text
