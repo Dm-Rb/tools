@@ -1,0 +1,13 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+
+
+class Browser:
+
+    def __init__(self):
+        # options = webdriver.FirefoxOptions()
+        # options.add_argument('--headless')  # Add this line for headless mode
+        # self.driver = webdriver.Firefox(options=options)
+        self.driver = webdriver.Chrome()
+        self.driver.implicitly_wait(8)
