@@ -25,6 +25,9 @@ class Spider:
         response = self.session.get(url=self.host + url if host else url)
         if response.status_code != 200:
             raise ValueError(f'status_code != 200: {url}')
+        # на случай проблем с кодировкой ответа
+        response.encoding = response.apparent_encoding
+
         if json_data:
             return response.json()
 
