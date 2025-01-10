@@ -2,7 +2,6 @@ import json
 
 
 class RWJson:
-    import json
 
     @staticmethod
     def write2file(path, data):
