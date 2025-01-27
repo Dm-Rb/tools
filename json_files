@@ -12,5 +12,5 @@ class RWJson:
     @staticmethod
     def read_json_file(path):
         with open(path, 'r', encoding='utf-8') as f:
-            data = json.load(f, ensure_ascii=False)
+            data = json.load(f)
         return data
