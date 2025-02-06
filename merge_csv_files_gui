@@ -1,0 +1,97 @@
+import customtkinter as ctk
+from tkinter import messagebox
+from tkinter import filedialog
+import multiprocessing
+import threading
+import pickle
+
+
+class App(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+        self.geometry("520x180")
+        self.minsize(260, 160)
+        self.title("Резиновый UI")
+
+        # Настройка расширения колонок и строк
+        self.grid_columnconfigure(0, weight=1)  # Левая колонка растягивается
+        self.grid_columnconfigure(1, weight=1)  # Правая колонка растягивается
+        self.grid_rowconfigure(2, weight=1)  # Третий ряд (текстбокс) растягивается
+
+        #Кнопка выбора файла для обработки
+        self.btn_select_folder = ctk.CTkButton(self, text="Добавить файл", command=self.select_input_file)
+        self.btn_select_folder.grid(row=0, column=0, padx=10, pady=10, sticky="ew")  # Растягиваем по ширине
+
+        # Кнопка старта обработки
+        self.run_button = ctk.CTkButton(self, text="Старт", command=self.command_start_processing)
+        self.run_button.grid(row=0, column=1, padx=10, pady=10, sticky="ew")  # Растягиваем по ширине
+
+
+        # Текстовое поле
+        self.textbox = ctk.CTkTextbox(
+            self,
+            fg_color="#FFFFFF",
+            bg_color="#000000",
+            font=("Courier New", 14),
+            state="normal"
+        )
+        self.textbox.grid(row=2, column=0, columnspan=2, pady=10, padx=10, sticky="nsew")  # Растягиваем во все стороны
+
+        # Переменная для передачи в функцию(класс)-процессинг
+        self.data = {'input_files': [], 'output_file': ''}
+
+    def select_input_file(self):
+        selected_file = filedialog.askopenfilename(
+            title="Выберите CSV файл",
+            filetypes=(
+                ("CSV files", "*.csv"),
+                ("All files", "*.*")
+            )
+        )
+        if selected_file:
+            # Добавить путь в текстбокс
+            self.update_textbox(selected_file)
+
+    def select_output_file(self):
+        file_path = filedialog.asksaveasfilename(
+            defaultextension=".csv",
+            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
+            title="Выберите место для сохранения",
+            initialfile="data_table.csv"  # Имя файла по умолчанию
+        )
+        if file_path:
+            self.data['output_file'] = file_path
+
+    def update_textbox(self, val):
+        self.textbox.insert("end", f"> {val}\n")
+
+    def command_start_processing(self):
+        # Сперва извлекаем все записи (пути к файлам) из текстбокса
+        text = self.textbox.get("1.0", "end-1c")
+        self.data['input_files'] = [i.lstrip('>').strip() for i in text.split('\n')]
+        self.data['input_files'] = [i for i in self.data['input_files'] if i]
+        # Затем добавляем путь файла записи аутпут
+        self.select_output_file()
+
+    # def get_progress_bar(self):
+    #     # Прогресс-бар
+    #     self.progress_bar = ctk.CTkProgressBar(self, orientation="horizontal")
+    #     self.progress_bar.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="ew")
+    #     self.progress = 0.0
+    #     self.progress_bar.configure(mode="indeterminate")  # Устанавливаем режим
+    #     self.progress_bar.start()  # Запускаем
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    multiprocessing.freeze_support()
+    app = App()
+    app.mainloop()
