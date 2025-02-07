@@ -1,13 +1,20 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
+from webdriver_manager.firefox import GeckoDriverManager
+import time
 
 
 class Browser:
 
+    host = ''
+
     def __init__(self):
-        # options = webdriver.FirefoxOptions()
-        # options.add_argument('--headless')  # Add this line for headless mode
-        # self.driver = webdriver.Firefox(options=options)
-        self.driver = webdriver.Chrome()
-        self.driver.implicitly_wait(8)
+        # Настройки Firefox
+        options = Options()
+        # options.add_argument("--headless")  # Запуск в фоновом режиме (без графического интерфейса)
+        # Запуск браузера
+        service = Service(GeckoDriverManager().install())
+        self.driver = webdriver.Firefox(service=service, options=options)
+        self.driver.implicitly_wait(10)
