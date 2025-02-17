@@ -1,0 +1,24 @@
+import openai
+
+# pip install openai
+openai.api_key = "ваш_api_ключ"
+
+def chat_with_gpt(prompt):
+    try:
+        # Отправка запроса к ChatGPT
+        response = openai.ChatCompletion.create(
+            model="gpt-4",  # Или используйте "gpt-3.5-turbo" для более дешевой модели
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        # Получение ответа от модели
+        return response["choices"][0]["message"]["content"]
+    except Exception as e:
+        return f"Ошибка: {e}"
+
+# Пример запроса
+user_input = "Как мне написать программу на Python?"
+response = chat_with_gpt(user_input)
+print(response)
