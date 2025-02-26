@@ -133,7 +133,7 @@ class ProcessingFiles:
             queue_to_gui.put(f"Начинаю запись данных в новый файл {data['output_file']}")
 
             with open(data['output_file'], mode='w', newline='', encoding='utf-8') as file:
-                writer = csv.DictWriter(file, fieldnames=cls.headers)
+                writer = csv.DictWriter(file, fieldnames=cls.headers, delimiter=';')
                 writer.writeheader()
                 writer.writerows(all_data)
             queue_to_gui.put(f'Записано {str(len(all_data))} строк')
