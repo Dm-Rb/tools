@@ -1,0 +1,18 @@
+import undetected_chromedriver as uc
+
+
+# pip install undetected_chromedriver
+# Это пропатченый вебдрайвекр, который позволяет обходить защиту cloudflare. Сам селениуи подтягивается автоматиччески
+
+
+
+options = uc.ChromeOptions()
+options.add_argument('--no-sandbox')  # Для стабильности на Linux/macOS
+options.add_argument('--disable-dev-shm-usage')  # Опционально, для контейнеров
+driver = uc.Chrome(options=options)
+
+driver.get("https://www.example.com")  # Замените на ваш сайт
+print(driver.title)  # Должно вывести заголовок страницы
+
+input("Нажмите Enter для закрытия...")  # Чтобы окно не закрылось сразу
+driver.quit()
