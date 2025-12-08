@@ -11,8 +11,8 @@ options.add_argument('--no-sandbox')  # Для стабильности на Lin
 options.add_argument('--disable-dev-shm-usage')  # Опционально, для контейнеров
 driver = uc.Chrome(options=options)
 
-driver.get("https://www.example.com")  # Замените на ваш сайт
-print(driver.title)  # Должно вывести заголовок страницы
+driver.get("https://www.example.com") 
+print(driver.title) 
 
-input("Нажмите Enter для закрытия...")  # Чтобы окно не закрылось сразу
+input("Нажмите Enter для закрытия...")  
 driver.quit()
