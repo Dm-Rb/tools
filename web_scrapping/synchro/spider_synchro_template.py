@@ -36,3 +36,5 @@ class Spider:
     @staticmethod
     def get_bs(html_text):
         return BeautifulSoup(html_text, 'html.parser')
+#find_all('td', class_=['navlabellink ', 'nvoffset', ] - поиск под мультиклассу
+
