@@ -52,6 +52,13 @@ class NetworkTrafficAnalyzer:
 
 
 # analyzer = NetworkTrafficAnalyzer(headless=True)
-# results = analyzer.analyze_url("тут какой то url")
+# url = "https://www.rockauto.com"
+# results = analyzer.analyze_url(url)
+# 
+# # Get headers and cookies from root
+# request_headers = None
+# cookies = None
 # for entry in results:
-#     print(entry)
+#     if entry['url'] == f"{url}/":
+#         request_headers = entry["request_headers"]
+#         cookies = entry["cookies"]
