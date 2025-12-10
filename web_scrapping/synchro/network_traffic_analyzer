@@ -46,8 +46,9 @@ class NetworkTrafficAnalyzer:
 
             page.goto(url, wait_until="networkidle")
             browser.close()
+        
+        return traffic_data # -> dict_keys(['url', 'method', 'request_headers', 'status', 'response_headers', 'response_body', 'cookies'])
 
-        return traffic_data
 
 
 # analyzer = NetworkTrafficAnalyzer(headless=True)
